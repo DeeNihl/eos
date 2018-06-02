@@ -15,9 +15,9 @@ Simple and fast setup of EOS.IO on Docker is also available.
 ## Build eos image
 
 ```bash
-git clone https://github.com/EOSIO/eos.git --recursive  --depth 1
+git clone https://github.com/eos-mainnet/eos.git --recursive  --depth 1
 cd eos/Docker
-docker build . -t eosio/eos
+docker build . -t eos-mainnet/eos
 ```
 
 The above will build off the most recent commit to the master branch by default. If you would like to target a specific branch/tag, you may use a build argument. For example, if you wished to generate a docker image based off of the v1.0.1 tag, you could do the following:
@@ -50,6 +50,12 @@ Alternately, you can directly mount host directory into the container
 
 ```bash
 docker run --name nodeos -v /path-to-data-dir:/opt/eosio/bin/data-dir -p 8888:8888 -p 9876:9876 -t eosio/eos nodeosd.sh -e arg1 arg2
+```
+
+If you receive the message: "Not producing block because the irreversible block is too old" try adding --max-irreversible-block-age 9999999
+
+```bash
+docker run --name nodeos -p 8888:8888 -p 9876:9876 -t eosio/eos nodeosd.sh --max-irreversible-block-age 9999999
 ```
 
 ## Get chain info
